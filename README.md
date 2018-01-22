@@ -7,7 +7,7 @@
        Run composer require server for a better web server.
 
   * Read the documentation at https://symfony.com/doc
-  
+  php bin/console server:run
 
 * Doctrine Documentation
     1. https://symfony.com/doc/current/doctrine.html
