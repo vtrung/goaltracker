@@ -19,7 +19,7 @@ class User
     // add your own fields
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, unique=TRUE)
      */
     private $username;
 

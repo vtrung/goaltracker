@@ -5,3 +5,7 @@
 index:
   path: /
   controller: App\Controller\HomeController::index
+
+goal:
+  path: /Goal
+  controller: App\Controller\GoalController::index
