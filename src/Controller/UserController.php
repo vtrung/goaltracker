@@ -39,7 +39,8 @@ class UserController extends Controller
                 );
             }
 
-            return $this->redirectToRoute('goal');
+            return $this->redirect("/goal/" . $u->getId());
+            //return $this->redirectToRoute('goal');
             //return $this->render('@Maker/demoPage.html.twig', [ 'path' => str_replace($this->getParameter('kernel.project_dir').'/', '', __FILE__) ]);
         }
         // replace this line with your own code!

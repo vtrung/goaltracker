@@ -6,6 +6,10 @@ index:
   path: /
   controller: App\Controller\HomeController::index
 
+user:
+  path: /User
+  controller: App\Controller\UserController::index
+
 goal:
   path: /Goal
   controller: App\Controller\GoalController::index

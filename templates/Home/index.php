@@ -25,7 +25,7 @@
                     <p>Helping you help yourself follow through on all your goals and ambitions one task at a time.</p>
                 </section>
                 <section>
-                    <a href="/user/index">Login To Account</a>
+                    <a href="/user">Login To Account</a>
                     <a href="/user/create">Create An Account</a>
                 </section>
                 <section>
