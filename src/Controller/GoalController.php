@@ -19,7 +19,7 @@ class GoalController extends Controller
 
         // replace this line with your own code!
         //return $this->render('@Maker/demoPage.html.twig', [ 'path' => str_replace($this->getParameter('kernel.project_dir').'/', '', __FILE__) ]);
-        return $this->render('Goal/index.php');
+        return $this->render('goal/index.php');
     }
 
     /**
@@ -41,4 +41,12 @@ class GoalController extends Controller
             'user' => $u
         ));
     }
+
+    /**
+     * @Route("/goal/{task}/{uid}", name="goalUid")
+     */
+    public function task(){
+
+    }
+
 }

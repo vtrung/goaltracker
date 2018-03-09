@@ -14,7 +14,7 @@ class HomeController extends Controller
     public function index()
     {
 
-        return $this->render('Home/index.php', []);
+        return $this->render('home/index.html.twig', []);
         //return new Response('Welcome to your new controller!');
     }
 }

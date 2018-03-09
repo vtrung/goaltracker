@@ -10,42 +10,53 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class UserController extends Controller
 {
     /**
-     * @Route("/user", name="user")
+     * @Route("/login", name="login")
      */
-    public function index(Request $request)
+    public function index(Request $request, AuthenticationUtils $authUtils)
     {
-        $form = $this->createFormBuilder()
-            ->add('username', TextType::class)
-            ->add('validate', SubmitType::class, array('label' => 'Login'))
-            ->getForm();
+//        $form = $this->createFormBuilder()
+//            ->add('username', TextType::class)
+//            ->add('validate', SubmitType::class, array('label' => 'Login'))
+//            ->getForm();
+//
+//        $form->handleRequest($request);
+//
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            // $form->getData() holds the submitted values
+//            $name = $form->getData('username');
+//
+//            $u = $this->getDoctrine()
+//                ->getRepository(User::class)
+//                ->findOneBy(['username' => $name]);
+//
+//            if (!$u) {
+//                throw $this->createNotFoundException(
+//                    'No user found for username: ' . $name
+//                );
+//            }
+//
+//            return $this->redirect("/goal/" . $u->getId());
+//            //return $this->redirectToRoute('goal');
+//            //return $this->render('@Maker/demoPage.html.twig', [ 'path' => str_replace($this->getParameter('kernel.project_dir').'/', '', __FILE__) ]);
+//        }
+//        // replace this line with your own code!
+//        return $this->render('user/index.php', array(
+//            'form' => $form->createView(),
+//        ));
+        // get the login error if there is one
+        $error = $authUtils->getLastAuthenticationError();
 
-        $form->handleRequest($request);
+        // last username entered by the user
+        $lastUsername = $authUtils->getLastUsername();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            // $form->getData() holds the submitted values
-            $name = $form->getData('username');
-
-            $u = $this->getDoctrine()
-                ->getRepository(User::class)
-                ->findOneBy(['username' => $name]);
-
-            if (!$u) {
-                throw $this->createNotFoundException(
-                    'No user found for username: ' . $name
-                );
-            }
-
-            return $this->redirect("/goal/" . $u->getId());
-            //return $this->redirectToRoute('goal');
-            //return $this->render('@Maker/demoPage.html.twig', [ 'path' => str_replace($this->getParameter('kernel.project_dir').'/', '', __FILE__) ]);
-        }
-        // replace this line with your own code!
-        return $this->render('user/index.php', array(
-            'form' => $form->createView(),
+        return $this->render('user/login.html.twig', array(
+            'last_username' => $lastUsername,
+            'error'         => $error,
         ));
     }
 
