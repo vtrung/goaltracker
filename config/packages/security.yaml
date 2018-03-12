@@ -33,9 +33,15 @@ security:
               check_path: login
               default_target_path: home
 
+            logout:
+              path: /logout
+              target: /
+
     access_control:
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/home, roles: [ROLE_USER, ROLE_ADMIN] }
+        - { path: ^/goal, roles: [ROLE_USER, ROLE_ADMIN] }
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+
 
 
             # activate different ways to authenticate

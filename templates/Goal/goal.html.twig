@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Goal</title>
+</head>
+<body>
+<div>
+    <a href="/logout">Logout</a>
+</div>
+<div>
+    <a href="/goal">Back</a>
+</div>
+<div id="goalapp">
+
+    <h1>{{ username }}</h1>
+
+    <p>{{ goal.title }}</p>
+    <p>{{ goal.description }}</p>
+
+</div>
+<div>
+    <a href="/goal/createtask?{{ goal.id }}">Create new Task</a>
+</div>
+</body>
+
+</html>

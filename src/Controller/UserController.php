@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
@@ -60,6 +61,7 @@ class UserController extends Controller
         ));
     }
 
+
     /**
      * @Route("/user/create", name="create")
      */
@@ -71,6 +73,7 @@ class UserController extends Controller
 
         $form = $this->createFormBuilder($user)
             ->add('username', TextType::class)
+            ->add('password', PasswordType::class)
             ->add('fname', TextType::class)
             ->add('lname', TextType::class)
             ->add('email', TextType::class)
@@ -97,7 +100,7 @@ class UserController extends Controller
             return $this->render('@Maker/demoPage.html.twig', [ 'path' => str_replace($this->getParameter('kernel.project_dir').'/', '', __FILE__) ]);
         }
 
-        return $this->render("User/create.php", array(
+        return $this->render("User/create.html.twig", array(
             'form' => $form->createView(),
         ));
     }

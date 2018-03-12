@@ -2,81 +2,66 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Title of the document</title>
+    <title>Goal</title>
 </head>
 <body>
-<div id="goalapp"></div>
-</body>
+    <div id="goalapp">
 
+        {{ username }}
+        <ul>
+            {% for goal in goals %}
+            <li>
+                <a href="/goal/info?gid={{ goal.id }}">
+                    {{ goal.title}}
+                </a>
+            </li>
 
 
+            {% endfor %}
+        </ul>
 
+    </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    \qw
-</head>
-
-<body>
-Content of the document......
+    <div>
+        <a href="/goal/create">Create New Goal</a>
+    </div>
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
