@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Goal</title>
+</head>
+<body>
+    <div id="goalapp">
+
+        {{ username }}
+        <ul>
+            {% for goal in goals %}
+            <li>
+                <a href="/goal/info?gid={{ goal.id }}">
+                    {{ goal.title}}
+                </a>
+            </li>
+
+
+            {% endfor %}
+        </ul>
+
+    </div>
+
+    <div>
+        <a href="/goal/create">Create New Goal</a>
+    </div>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
