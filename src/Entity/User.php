@@ -34,17 +34,6 @@ class User implements UserInterface
      */
     private $passwordsalt;
 
-
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
-    private $fname;
-
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
-    private $lname;
-
     /**
      * @ORM\Column(type="string", length=100)
      */
@@ -73,21 +62,6 @@ class User implements UserInterface
         $this->username = $username;
     }
 
-    public function getFName(){
-        return $this->fname;
-    }
-
-    public function setFName($name){
-        $this->fname = $name;
-    }
-
-    public function getLName(){
-        return $this->lname;
-    }
-
-    public function setLName($name){
-        $this->lname = $name;
-    }
     public function getEmail(){
         return $this->email;
     }

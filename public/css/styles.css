@@ -1,0 +1,33 @@
+/* MAIN STYLESHEET */
+
+body{
+    margin: 0;
+    body: 0;
+}
+.header-container{
+    width: 100%;
+    margin: 0;
+    padding: 30px;
+    text-align: center;
+    background-color: forestgreen;
+}
+
+.header-container h1{
+    color: #fff;
+}
+
+.footer-container{
+    width: 100%;
+    margin: 0;
+    padding: 10px 50px;
+    text-align: left;
+    background-color: forestgreen;
+    color: #fff;
+    position:absolute;
+    bottom:0;
+}
+
+.main-container{
+    margin: 0;
+    padding: 50px;
+}

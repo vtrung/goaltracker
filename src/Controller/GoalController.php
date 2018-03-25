@@ -30,8 +30,6 @@ class GoalController extends Controller
         $repo = $this->getDoctrine()->getRepository(Goal::class);
         $goals = $repo->findBy(['uid'=>$uid]);
 
-        // replace this line with your own code!
-        //return $this->render('@Maker/demoPage.html.twig', [ 'path' => str_replace($this->getParameter('kernel.project_dir').'/', '', __FILE__) ]);
         return $this->render('goal/index.html.twig', ["username"=>$user->getUsername(), "goals"=>$goals]);
     }
 
@@ -71,27 +69,21 @@ class GoalController extends Controller
             ->add('title', TextType::class)
             ->add('description', TextType::class)
             ->add('goaldate', DateType::class)
-            ->add('save', SubmitType::class, array('label' => 'Create User'))
+            ->add('save', SubmitType::class, array('label' => 'Create Goal'))
             ->getForm();
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // $form->getData() holds the submitted values
-            // but, the original `$task` variable has also been updated
             $goal = $form->getData();
             $goal->setUid($uid);
             $goal->setStatus("new");
 
-            // ... perform some action, such as saving the task to the database
-            // for example, if Task is a Doctrine entity, save it!
-            // $em = $this->getDoctrine()->getManager();
             $em = $this->getDoctrine()->getManager();
             $em->persist($goal);
             $em->flush();
 
             return $this->redirectToRoute('goals');
-            //return $this->render('@Maker/demoPage.html.twig', [ 'path' => str_replace($this->getParameter('kernel.project_dir').'/', '', __FILE__) ]);
         }
 
         return $this->render("goal/creategoal.html.twig", array(
@@ -106,34 +98,30 @@ class GoalController extends Controller
     public function createtask(Request $request, UserInterface $user = null)
     {
         $uid = $user->getId();
-        $gid = $gid = $request->query->get("gid");
+        $gid = $request->query->get("gid");
+
         $task = new Task();
 
         $form = $this->createFormBuilder($task)
             ->add('description', TextType::class)
             ->add('goaldate', DateType::class)
             ->add('completedate', DateType::class)
-            ->add('gid',HiddenType::class, array('data'=>$gid))
-            ->add('save', SubmitType::class, array('label' => 'Create User'))
+            ->add('save', SubmitType::class, array('label' => 'Create Task'))
             ->getForm();
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             // $form->getData() holds the submitted values
-            // but, the original `$task` variable has also been updated
             $task = $form->getData();
+            $task->setGid($gid);
             $task->setStatus("new");
 
-            // ... perform some action, such as saving the task to the database
-            // for example, if Task is a Doctrine entity, save it!
-            // $em = $this->getDoctrine()->getManager();
             $em = $this->getDoctrine()->getManager();
             $em->persist($task);
             $em->flush();
 
-            return $this->redirectToRoute('goals');
-            //return $this->render('@Maker/demoPage.html.twig', [ 'path' => str_replace($this->getParameter('kernel.project_dir').'/', '', __FILE__) ]);
+            return $this->redirectToRoute('goal', array('gid'=>$task->getGid()));
         }
 
         return $this->render("goal/createtask.html.twig", array(
@@ -141,46 +129,119 @@ class GoalController extends Controller
         ));
     }
 
-//    /**
-//     * @Route("/goal/deletetask", name="deletetask")
-//     */
-//    public function deletetask(Request $request, UserInterface $user = null)
-//    {
-//        $uid = $user->getId();
-//        $gid = $gid = $request->query->get("gid");
-//        $task = new Task();
-//
-//        $form = $this->createFormBuilder($task)
-//            ->add('description', TextType::class)
-//            ->add('goaldate', DateType::class)
-//            ->add('completedate', DateType::class)
-//            ->add('gid',HiddenType::class, array('data'=>$gid))
-//            ->add('save', SubmitType::class, array('label' => 'Create User'))
-//            ->getForm();
-//
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            // $form->getData() holds the submitted values
-//            // but, the original `$task` variable has also been updated
-//            $task = $form->getData();
-//            $task->setStatus("new");
-//
-//            // ... perform some action, such as saving the task to the database
-//            // for example, if Task is a Doctrine entity, save it!
-//            // $em = $this->getDoctrine()->getManager();
-//            $em = $this->getDoctrine()->getManager();
-//            $em->persist($task);
-//            $em->flush();
-//
-//            return $this->redirectToRoute('goals');
-//            //return $this->render('@Maker/demoPage.html.twig', [ 'path' => str_replace($this->getParameter('kernel.project_dir').'/', '', __FILE__) ]);
-//        }
-//
-//        return $this->render("goal/createtask.html.twig", array(
-//            'form' => $form->createView(),
-//        ));
-//    }
+    /**
+     * @Route("/goal/edit", name="editgoal")
+     */
+    public function editgoal(Request $request, UserInterface $user = null)
+    {
+
+        $uid = $user->getId();
+        $goal = new Goal();
+
+        $form = $this->createFormBuilder($goal)
+            ->add('title', TextType::class)
+            ->add('description', TextType::class)
+            ->add('goaldate', DateType::class)
+            ->add('save', SubmitType::class, array('label' => 'Create Goal'))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $goal = $form->getData();
+            $goal->setUid($uid);
+            $goal->setStatus("new");
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($goal);
+            $em->flush();
+
+            return $this->redirectToRoute('goals');
+        }
+
+        return $this->render("goal/creategoal.html.twig", array(
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/goal/edittask", name="edittask")
+     */
+    public function edittask(Request $request, UserInterface $user = null)
+    {
+        $uid = $user->getId();
+        $gid = $request->query->get("gid");
+        $tid = $request->query->get("tid");
+
+        $task = $this->getDoctrine()->getRepository(Task::class)->findOneBy(["id" => $tid]);
+
+        $form = $this->createFormBuilder($task)
+            ->add('description', TextType::class, array('value' => $task->getDescription()))
+            ->add('goaldate', DateType::class, array('value' => $task->getGoalDate()))
+            ->add('completedate', DateType::class, array('value' => $task->getCompleteDate()))
+            ->add('save', SubmitType::class, array('label' => 'Edit Task'))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $task->setDescription($data->description);
+            $task->setGoalDate($data->goaldate);
+            $task->setCompleteDate($data->completedate);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            return $this->redirectToRoute('goal', array('gid'=>$task->getGid()));
+        }
+
+        return $this->render("goal/createtask.html.twig", array(
+            'form' => $form->createView(),
+        ));
+    }
+
+
+    /**
+     * @Route("/goal/deletetask", name="deletetask")
+     */
+    public function deletetask(Request $request, UserInterface $user = null)
+    {
+        $uid = $user->getId();
+        $gid = $request->query->get("gid");
+        $tid = $request->query->get("tid");
+
+        $task = $this->getDoctrine()->getRepository(Task::class)->findOneBy(["id" => $tid]);
+
+        if($task != null){
+            $gid = $task->getGid();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($task);
+            $entityManager->flush();
+
+        }
+
+        return $this->redirectToRoute('goal', array('gid'=>$gid));
+    }
+
+    /**
+     * @Route("/goal/deletegoal", name="deletegoal")
+     */
+    public function deletegoal(Request $request, UserInterface $user = null)
+    {
+        $uid = $user->getId();
+        $gid = $request->query->get("gid");
+
+        $goal = $this->getDoctrine()->getRepository(Goal::class)->findOneBy(["id" => $gid]);
+
+        if($goal != null){
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($goal);
+            $entityManager->flush();
+
+        }
+        return $this->redirectToRoute('goals');
+    }
 
 
 

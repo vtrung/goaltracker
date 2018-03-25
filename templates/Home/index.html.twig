@@ -1,23 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Title of the document</title>
-</head>
+{% extends "base.html.twig" %}
 
-<body>
-    <div>
-        <div class="header-container">
-            <div class="container">
-                <div class="logo-section">
-                    <img src="#" />
-                </div>
-                <div class="section">
-                    <div>Goal Tracker</div>
-                </div>
-            </div>
-
-        </div>
+{% block body %}
         <div class="main-container">
             <div class="container">
                 <section>
@@ -36,14 +19,4 @@
                 </section>
             </div>
         </div>
-<!--        <div class="footer-container">-->
-<!--            <div class="container">-->
-<!--                <ul>-->
-<!--                    <li><a href="#">about us</a></li>-->
-<!--                </ul>-->
-<!--            </div>-->
-<!--        </div>-->
-    </div>
-</body>
-
-</html>
+{% endblock %}

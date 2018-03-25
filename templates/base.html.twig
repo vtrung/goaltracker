@@ -3,10 +3,19 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="css/styles.css" type="text/css">
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        <div class="header-container">
+            <a href="/"><h1>GOAL Tracker</h1></a>
+        </div>
+        <div class="main-container">
+            {% block body %}{% endblock %}
+            {% block javascripts %}{% endblock %}
+        </div>
+        <div class="footer-container">
+            <p>random text here</p>
+        </div>
     </body>
 </html>

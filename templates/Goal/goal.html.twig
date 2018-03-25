@@ -1,27 +1,33 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Goal</title>
-</head>
-<body>
-<div>
-    <a href="/logout">Logout</a>
-</div>
-<div>
-    <a href="/goal">Back</a>
-</div>
-<div id="goalapp">
+{% extends "base.html.twig" %}
 
-    <h1>{{ username }}</h1>
+{% block body %}
+    <div>
+        <a href="/logout">Logout</a>
+    </div>
+    <div>
+        <a href="/goal">Back</a>
+    </div>
+    <div id="goalapp">
 
-    <p>{{ goal.title }}</p>
-    <p>{{ goal.description }}</p>
+        <h1>{{ username }}</h1>
 
-</div>
-<div>
-    <a href="/goal/createtask?{{ goal.id }}">Create new Task</a>
-</div>
-</body>
+        <p>{{ goal.title }}</p>
+        <p>{{ goal.description }}</p>
 
-</html>
+        <ul>
+            {% for task in tasks %}
+                <li>
+                    <p>{{ task.description }}</p>
+                    <a href="">edit</a>
+                    <a href="/goal/deletetask?gid={{ goal.id }}&tid={{ task.id }}">delete</a>
+                </li>
+            {% endfor %}
+
+        </ul>
+
+    </div>
+    <div>
+        <a href="/goal/createtask?gid={{ goal.id }}">Create New Task</a>
+        <a href="/goal/deletegoal?gid={{ goal.id }}">Delete This Goal</a>
+    </div>
+{% endblock %}
