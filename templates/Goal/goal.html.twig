@@ -1,15 +1,10 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <div>
-        <a href="/logout">Logout</a>
-    </div>
-    <div>
-        <a href="/goal">Back</a>
-    </div>
+
     <div id="goalapp">
 
-        <h1>{{ username }}</h1>
+        <h1> {{ username }} </h1>
 
         <p>{{ goal.title }}</p>
         <p>{{ goal.description }}</p>

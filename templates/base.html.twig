@@ -3,12 +3,24 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="stylesheet" href="css/styles.css" type="text/css">
+        <link rel="stylesheet" href="/css/styles.css" type="text/css">
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
         <div class="header-container">
             <a href="/"><h1>GOAL Tracker</h1></a>
+
+            {% block header %}
+                <div class="header-links">
+                    <div>
+                        <a href="/logout">Logout</a>
+                    </div>
+                    <div>
+                        <a href="/goal">Back</a>
+                    </div>
+                </div>
+            {% endblock %}
+
         </div>
         <div class="main-container">
             {% block body %}{% endblock %}

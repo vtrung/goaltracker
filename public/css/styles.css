@@ -31,3 +31,14 @@ body{
     margin: 0;
     padding: 50px;
 }
+
+.header-links{
+    text-align: left;
+    margin: 0 15px;
+}
+
+.user-greeting{
+    margin-bottom: 30px;
+    font-size: 18px;
+    font-weight: 600;
+}

@@ -1,26 +1,29 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <div>
-        <a href="/logout">Logout</a>
-    </div>
-    <div>
-        <a href="/goal">Back</a>
-    </div>
+
     <div id="goalapp">
 
-        {{ username }}
-        <ul>
-            {% for goal in goals %}
-                <li>
-                    <a href="/goal/info?gid={{ goal.id }}">
-                        {{ goal.title}}
-                    </a>
-                </li>
+        <div class="user-greeting">
+            Hello {{ username }}
+        </div>
+
+        <div>
+            <p>Your Goals</p>
+            <ul>
+                {% for goal in goals %}
+
+                    <li>
+                        <a href="/goal/info?gid={{ goal.id }}">
+                            {{ goal.title}}
+                        </a>
+                    </li>
 
 
-            {% endfor %}
-        </ul>
+                {% endfor %}
+            </ul>
+        </div>
+
 
     </div>
 
